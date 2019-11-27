@@ -529,17 +529,17 @@ static void lcm_get_params(LCM_PARAMS *params)
 	//video mode timing
     params->dsi.PS=LCM_PACKED_PS_24BIT_RGB888;
 
-params->dsi.vertical_sync_active				= 2; //8;	//2;
-params->dsi.vertical_backporch					= 12; //18;	//14;
-params->dsi.vertical_frontporch					= 6; //20;	//16;
+params->dsi.vertical_sync_active				= 8; //8;	//2;
+params->dsi.vertical_backporch					= 18; //18;	//14;
+params->dsi.vertical_frontporch					= 20; //20;	//16;
 params->dsi.vertical_active_line				= FRAME_HEIGHT;
 
-params->dsi.horizontal_sync_active				= 8;	//2;
-params->dsi.horizontal_backporch				= 8;//120;	//60;	//42;
-params->dsi.horizontal_frontporch				= 8;//100;	//60;	//44;
+params->dsi.horizontal_sync_active				= 2;	//2;
+params->dsi.horizontal_backporch				= 42;//120;	//60;	//42;
+params->dsi.horizontal_frontporch				= 44;//100;	//60;	//44;
 params->dsi.horizontal_active_pixel				= FRAME_WIDTH;
 
-params->dsi.PLL_CLOCK = 160;//208; 210	
+params->dsi.PLL_CLOCK = 130;// 160 208; 210	
 
 }
 void lcm_display_on_jd9161(void)
