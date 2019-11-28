@@ -72,30 +72,265 @@ struct LCM_setting_table {
 
 //update initial param for IC boe_nt35521 0.01
 static struct LCM_setting_table lcm_initialization_setting[] = {
-{0xBF,3,{0x91,0x61,0xF2}},
-{0xB3,2,{0x00,0x7E}},
-{0xB4,2,{0x00,0x7E}},
-{0xB8,6,{0x00,0xBF,0x01,0x00,0xBF,0x01}},
-{0xBA,3,{0x3E,0x23,0x00}},
-{0xC3,1,{0x02}},
-{0xC4,2,{0x00,0x64}},
-{0xC7,9,{0x00,0x01,0x31,0x05,0x65,0x2C,0x13,0xA5,0xA5}},
-{0xC8,38,{0x7E,0x6F,0x64,0x59,0x57,0x49,0x4D,0x36,0x4D,0x49,0x47,0x62,0x4E,0x53,0x44,0x40,0x3A,0x1E,0x14,0x7E,0x6F,0x64,0x59,0x57,0x49,0x4D,0x36,0x4D,0x49,0x47,0x62,0x4E,0x53,0x44,0x40,0x3A,0x1E,0x14}},
-{0xD4,16,{0x1E,0x1F,0x17,0x37,0x06,0x04,0x0A,0x08,0x00,0x02,0x1F,0x1F,0x1F,0x1F,0x1F,0x1F}},
-{0xD5,16,{0x1E,0x1F,0x17,0x37,0x07,0x05,0x0B,0x09,0x01,0x03,0x1F,0x1F,0x1F,0x1F,0x1F,0x1F}},
-{0xD6,16,{0x1F,0x1E,0x17,0x17,0x09,0x0B,0x05,0x07,0x03,0x01,0x1F,0x1F,0x1F,0x1F,0x1F,0x1F}},
-{0xD7,16,{0x1F,0x1E,0x17,0x17,0x08,0x0A,0x04,0x06,0x02,0x00,0x1F,0x1F,0x1F,0x1F,0x1F,0x1F}},
-{0xD8,20,{0x20,0x00,0x00,0x30,0x03,0x30,0x01,0x02,0x00,0x01,0x02,0x06,0x70,0x00,0x00,0x73,0x07,0x06,0x70,0x08}},
-{0xD9,19,{0x00,0x0A,0x0A,0x80,0x00,0x00,0x06,0x7b,0x00,0x80,0x00,0x33,0x6A,0x1F,0x00,0x00,0x00,0x03,0x7b}},
-{0xBE,1,{0x01}},
-{0xC1,1,{0x10}}, 
-{0xCC,10,{0x34,0x20,0x38,0x60,0x11,0x91,0x00,0x40,0x00,0x00}},
-{0xBE,1,{0x00}},
-{0x11,1,{0x00}},
-{REGFLAG_DELAY, 120, {}},  
-{0x29,1,{0x00}},	
-{REGFLAG_DELAY, 20, {}},  
-{REGFLAG_END_OF_TABLE, 0x00, {}} 
+	{0xFF,5,{0xFF,0x98,0x06,0x04,0x01}},// Change to Page 1
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x08,1,{0x10}},// output SDA
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x21,1,{0x01}},// DE = 1 Active
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x30,1,{0x02}},// 480 X 800
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x31,1,{0x02}},// Column Inversion
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x40,1,{0x10}}, // 2.5VCI/-2VCL  15
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x41,1,{0x33}}, // 6/-6 44  55
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x42,1,{0x03}},// DDVDH+VCI-VCL/DDVDL-DDVDH 
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x43,1,{0x09}},// VGH_CLAMP 0FF ;
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x44,1,{0x07}},// VGL_CLAMP ON ; 
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x50,1,{0x78}},//50
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x51,1,{0x78}},//50
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x52,1,{0x00}},//Flicker
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x53,1,{0x73}},//Flicker6D  
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x57,1,{0x50}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x60,1,{0x07}}, // SDTI
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x61,1,{0x00}},// CRTI
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x62,1,{0x08}},// EQTI
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x63,1,{0x00}}, // PCTI
+		{REGFLAG_DELAY, 20, {}}, 
+		//++++++++++++++++++ Gamma Setting ++++++++++++++++++//
+		{0xA0,1,{0x00}},// Gamma 255 
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xA1,1,{0x07}},// Gamma 251 
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xA2,1,{0x0D}}, // Gamma 247
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xA3,1,{0x0C}},// Gamma 239
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xA4,1,{0x04}},// Gamma 231
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xA5,1,{0x07}},// Gamma 203
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xA6,1,{0x06}},// Gamma 175
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xA7,1,{0x04}},// Gamma 147
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xA8,1,{0x09}},// Gamma 108
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xA9,1,{0x0C}},// Gamma 80
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xAA,1,{0x14}},// Gamma 52
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xAB,1,{0x08}},// Gamma 24
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xAC,1,{0x0E}},// Gamma 16
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xAD,1,{0x17}},// Gamma 8
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xAE,1,{0x0E}},// Gamma 4  
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xAF,1,{0x00}},// Gamma 0
+		{REGFLAG_DELAY, 20, {}}, 
+		
+		///==============Nagitive
+
+		{0xC0,1,{0x00}},// Gamma 255 
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xC1,1,{0x06}},// Gamma 251
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xC2,1,{0x0C}},// Gamma 247
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xC3,1,{0x0C}},// Gamma 239
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xC4,1,{0x04}},// Gamma 231
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xC5,1,{0x07}}, // Gamma 203
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xC6,1,{0x06}},// Gamma 175
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xC7,1,{0x04}}, // Gamma 147
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xC8,1,{0x08}},// Gamma 108
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xC9,1,{0x0C}},// Gamma 80
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xCA,1,{0x13}},// Gamma 52
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xCB,1,{0x08}},// Gamma 24
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xCC,1,{0x0E}},// Gamma 16
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xCD,1,{0x18}},// Gamma 8
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xCE,1,{0x0E}},// Gamma 4
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xCF,1,{0x00}}, // Gamma 0
+		{REGFLAG_DELAY, 20, {}}, 
+//****************************************************************************//
+//****************************** Page 6 Command ******************************//
+//****************************************************************************//
+
+		{0xFF,5,{0xFF,0x98,0x06,0x04,0x06}},// Change to Page 6
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x00,1,{0x21}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x01,1,{0x0A}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x02,1,{0x00}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x03,1,{0x00}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x04,1,{0x01}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x05,1,{0x01}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x06,1,{0x80}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x07,1,{0x06}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x08,1,{0x01}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x09,1,{0x80}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x0A,1,{0x00}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x0B,1,{0x00}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x0C,1,{0x0A}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x0D,1,{0x0A}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x0E,1,{0x00}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x0F,1,{0x00}},
+		{REGFLAG_DELAY, 20, {}}, 
+		
+		{0x10,1,{0xF0}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x11,1,{0xF4}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x12,1,{0x04}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x13,1,{0x00}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x14,1,{0x00}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x15,1,{0xC0}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x16,1,{0x08}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x17,1,{0x00}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x18,1,{0x00}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x19,1,{0x00}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x1A,1,{0x00}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x1B,1,{0x00}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x1C,1,{0x00}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x1D,1,{0x00}},
+		{REGFLAG_DELAY, 20, {}}, 
+		
+		{0x20,1,{0x01}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x21,1,{0x23}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x22,1,{0x45}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x23,1,{0x67}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x24,1,{0x01}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x25,1,{0x23}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x26,1,{0x45}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x27,1,{0x67}},
+		{REGFLAG_DELAY, 20, {}}, 
+		
+		{0x30,1,{0x01}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x31,1,{0x11}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x32,1,{0x00}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x33,1,{0xEE}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x34,1,{0xFF}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x35,1,{0xCB}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x36,1,{0xDA}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x37,1,{0xAD}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x38,1,{0xBC}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x39,1,{0x76}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x3A,1,{0x67}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x3B,1,{0x22}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x3C,1,{0x22}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x3D,1,{0x22}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x3E,1,{0x22}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x3F,1,{0x22}},
+		{REGFLAG_DELAY, 20, {}}, 
+		
+		{0x40,1,{0x22}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x52,1,{0x10}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x53,1,{0x10}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x54,1,{0x13}},
+		{REGFLAG_DELAY, 20, {}}, 
+//****************************************************************************//
+//****************************** Page 7 Command ******************************//
+//****************************************************************************//		
+		
+		{0xFF,5,{0xFF,0x98,0x06,0x04,0x07}},// Change to Page 7
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xB3,1,{0x10}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x17,1,{0x22}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x02,1,{0x77}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x26,1,{0xB2}},
+		{REGFLAG_DELAY, 20, {}}, 
+		{0xE1,1,{0x79}},
+		{REGFLAG_DELAY, 20, {}}, 
+//****************************************************************************//
+
+		{0xFF,5,{0xFF,0x98,0x06,0x04,0x00}},// Change to Page 0
+		{REGFLAG_DELAY, 20, {}}, 
+		{0x35,1,{0x00}},
+		{0x11,1,{0x00}},// Sleep-Out
+		{REGFLAG_DELAY, 120, {}},  
+		{0x29,1,{0x00}},	// Display on
+		{REGFLAG_DELAY, 20, {}},  
+		{REGFLAG_END_OF_TABLE, 0x00, {}} 
+
 };
 #if 1
 static void init_lcm_registers(void){
@@ -302,7 +537,8 @@ params->dsi.horizontal_backporch				= 8;//120;	//60;	//42;
 params->dsi.horizontal_frontporch				= 8;//100;	//60;	//44;
 params->dsi.horizontal_active_pixel				= FRAME_WIDTH;
 
-params->dsi.PLL_CLOCK = 160;//208; 210	
+params->dsi.PLL_CLOCK = 130;// 160 208; 210	
+
 
 }
 
@@ -348,8 +584,8 @@ static void lcm_init(void)
 	MDELAY(10);
 	SET_RESET_PIN(1);
 	MDELAY(120);
-    //push_table(lcm_initialization_setting, sizeof(lcm_initialization_setting) / sizeof(struct LCM_setting_table), 1);
-	init_lcm_registers();
+    push_table(lcm_initialization_setting, sizeof(lcm_initialization_setting) / sizeof(struct LCM_setting_table), 1);
+	//init_lcm_registers();
 	lcm_display_on_jd9161();
     LCD_DEBUG("uboot:boe_nt35521_lcm_init\n");
 }
