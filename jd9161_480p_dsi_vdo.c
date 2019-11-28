@@ -456,7 +456,7 @@ MDELAY(200);
 #endif
 }
 #endif
-#if 1
+#if 0
 static struct LCM_setting_table lcm_deep_sleep_mode_in_setting[] = {
 
     {0xFF, 3, {0x98,0x81,0x00}},	
@@ -594,7 +594,7 @@ static void lcm_init(void)
 static void lcm_suspend(void)
 {
 
-    push_table(lcm_deep_sleep_mode_in_setting, sizeof(lcm_deep_sleep_mode_in_setting) / sizeof(struct LCM_setting_table), 1);
+    //push_table(lcm_deep_sleep_mode_in_setting, sizeof(lcm_deep_sleep_mode_in_setting) / sizeof(struct LCM_setting_table), 1);
 
 	SET_RESET_PIN(0);
 	MDELAY(10);
